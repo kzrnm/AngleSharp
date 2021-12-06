@@ -263,7 +263,21 @@ namespace AngleSharp.Dom
         public String Hash
         {
             get => String.IsNullOrEmpty(_fragment) ? String.Empty : $"#{_fragment}";
-            set => Fragment = value;
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    Fragment = null;
+                }
+                else if (value[0] is '#')
+                {
+                    Fragment = value.Substring(1);
+                }
+                else
+                {
+                    Fragment = value;
+                }
+            }
         }
 
         /// <summary>
@@ -384,7 +398,21 @@ namespace AngleSharp.Dom
         public String Search
         {
             get => String.IsNullOrEmpty(_query) ? String.Empty : $"?{_query}";
-            set => Query = value;
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    Query = null;
+                }
+                else if (value[0] is '?')
+                {
+                    Query = value.Substring(1);
+                }
+                else
+                {
+                    Query = value;
+                }
+            }
         }
 
         /// <summary>
